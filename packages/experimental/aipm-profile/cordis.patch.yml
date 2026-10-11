@@ -1,0 +1,12 @@
+# AIPM workbench profile layer.
+# Apply after dsh-base (which already provides dsh-skill) to add the AIPM
+# domain plugin and its bundled project-initiation-report skill.
+# This bundle does not modify the default Web composition; opt in explicitly
+# via a profile patch or --patch overlay.
+
+- insert:
+    - id: aipm
+      name: '@deepseek-ai/dsh-experimental-aipm'
+
+    - id: ui-aipm
+      name: '@deepseek-ai/dsh-experimental-client-ui-aipm'

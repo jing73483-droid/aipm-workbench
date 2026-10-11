@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/experimental/aipm/README.md
+/:
+  en: b09e6f9df493ee7a
+  zh: 97c932d35832118d
+/deepseek-ai-dsh-experimental-aipm:
+  en: 07c3fa0a23c3fd5d
+  zh: 4f011c29801d8d01
+/deepseek-ai-dsh-experimental-aipm/summary:
+  en: ceb109a253f0754b
+  zh: 55eb0af923189bbb
+/deepseek-ai-dsh-experimental-aipm/table-of-contents:
+  en: 00a0098a7955e87b
+  zh: b8222822e82a5dd6
+/deepseek-ai-dsh-experimental-aipm/use-this-package:
+  en: 235d4b5dc410b478
+  zh: 441f6a5534e3b373
+/deepseek-ai-dsh-experimental-aipm/domain-model:
+  en: b7374bbbaf0a503a
+  zh: dfba5db07158c0bf
+/deepseek-ai-dsh-experimental-aipm/domain-model/eight-fixed-pipeline-stages:
+  en: 77fc97c814c6821c
+  zh: a73757f14ff2398c
+/deepseek-ai-dsh-experimental-aipm/domain-model/seven-lifecycle-statuses:
+  en: fae0d74fd8b329f4
+  zh: 4c0d4cbc481e0915
+/deepseek-ai-dsh-experimental-aipm/local-project-initialization:
+  en: 9646417ea728a681
+  zh: 8a229b195e5a59f1
+/deepseek-ai-dsh-experimental-aipm/assets-skills-gates-and-review:
+  en: dc4b027852994a82
+  zh: 9fad0c4455297e08
+/deepseek-ai-dsh-experimental-aipm/bundled-skills:
+  en: 555aca26ef59e235
+  zh: fc8ea527eb0b9a1a
+/deepseek-ai-dsh-experimental-aipm/model-experience:
+  en: 9289f3c1142fc692
+  zh: 0ac02feef6e9b2d3
+/deepseek-ai-dsh-experimental-aipm/model-experience/kv-cache-effect:
+  en: 698135a0193be582
+  zh: 1586e0b090113164
+/deepseek-ai-dsh-experimental-aipm/known-limitations-and-deferred-work:
+  en: b45b099333483482
+  zh: c426ef2784093208

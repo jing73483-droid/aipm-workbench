@@ -1,0 +1,68 @@
+.pearl {
+  display: block;
+  overflow: visible;
+  flex: none;
+  filter: drop-shadow(0 12px 18px rgba(90, 70, 160, 0.28));
+  pointer-events: none;
+  user-select: none;
+}
+
+.liquid {
+  transform-origin: 32px 32px;
+  animation: aipm-pearl-swirl 7s ease-in-out infinite;
+}
+
+.nacre {
+  transform-origin: 32px 32px;
+  mix-blend-mode: screen;
+  animation: aipm-pearl-sheen 9s linear infinite;
+}
+
+@keyframes aipm-pearl-swirl {
+  0%,
+  100% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+
+  50% {
+    transform: rotate(22deg) translate(1.2px, -1px);
+  }
+}
+
+@keyframes aipm-pearl-sheen {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid,
+  .nacre {
+    animation: none;
+  }
+}
+
+.hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--aipm-ink, #1c1916);
+}
+
+.greeting {
+  font-size: 42px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+/* The slot host wraps the mark in a display:contents node inside the fish hitbox;
+   hide the original whale headline (探索未至之境 + 预览版) that follows that hitbox. */
+:global(*:has(> [data-slot='conversation.hero.brand.mark'])) + * {
+  display: none !important;
+}

@@ -1,0 +1,31 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/experimental/aipm-profile/README.md
+/:
+  en: 1b473f58523ed6ed
+  zh: 871a9d504418df5b
+/deepseek-ai-dsh-experimental-aipm-profile:
+  en: f79038fd760805a6
+  zh: 941cfddaae6b3392
+/deepseek-ai-dsh-experimental-aipm-profile/summary:
+  en: 95d1f8e7484ce692
+  zh: 88977f6dc9379e45
+/deepseek-ai-dsh-experimental-aipm-profile/table-of-contents:
+  en: 3ad862614b39a447
+  zh: 0f3a5533bf4367f2
+/deepseek-ai-dsh-experimental-aipm-profile/use-this-package:
+  en: 68ee841875829895
+  zh: 990335ec339ad5ac
+/deepseek-ai-dsh-experimental-aipm-profile/understand-the-implementation:
+  en: 773a812dd725d25c
+  zh: 123b841115014d27
+/deepseek-ai-dsh-experimental-aipm-profile/model-experience:
+  en: c307bd40e374b18a
+  zh: b94b4d0a77441abb
+/deepseek-ai-dsh-experimental-aipm-profile/model-experience/kv-cache-effect:
+  en: 4d85920504128abd
+  zh: a00fa57a736f55ce
+/deepseek-ai-dsh-experimental-aipm-profile/known-limitations-and-deferred-work:
+  en: 6111913c10948e48
+  zh: a41dc4ffd2a74223

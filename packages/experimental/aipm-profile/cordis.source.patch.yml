@@ -1,0 +1,12 @@
+# Source overlay for a tsx-backed `dsh web` launch. Relative entries are
+# anchored to this file and run through the CLI's tsx loader without a
+# profile install, as the inspector's source overlay does.
+#
+#   pnpm dsh web --patch ./packages/experimental/aipm-profile/cordis.source.patch.yml
+
+- insert:
+    - id: aipm
+      name: '../aipm/src/index.ts'
+
+    - id: ui-aipm
+      name: '../client-ui-aipm/src/index.ts'

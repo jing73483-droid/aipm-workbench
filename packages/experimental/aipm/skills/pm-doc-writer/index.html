@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM Doc Writer · 产品经理文档生成 Skill v1.0</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 28px 24px 80px; }
+
+/* ===== Header ===== */
+header { text-align: center; padding: 36px 0 18px; }
+header h1 {
+  font-size: 36px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+header .subtitle { color: #888; font-size: 15px; margin-top: 8px; letter-spacing: 1px; }
+header .version-chip {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-radius: 16px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* ===== Stats Bar ===== */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 22px 0 32px;
+  flex-wrap: wrap;
+}
+.stat-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 32px;
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
+  text-align: center;
+  min-width: 110px;
+  transition: transform .2s;
+}
+.stat-item:hover { transform: translateY(-2px); }
+.stat-item .num {
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-item .label { font-size: 12px; color: #999; margin-top: 4px; letter-spacing: .5px; }
+
+/* ===== Section ===== */
+section { margin-bottom: 40px; }
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 18px;
+  padding-left: 14px;
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title .badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  background: #f0f2ff;
+  color: #667eea;
+  border-radius: 10px;
+}
+
+/* ===== Skill Identity Card ===== */
+.identity-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 24px rgba(118,75,162,.18);
+  position: relative;
+  overflow: hidden;
+}
+.identity-card::after {
+  content: "";
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
+  border-radius: 50%;
+}
+.identity-card h2 { font-size: 24px; margin-bottom: 14px; font-weight: 700; }
+.identity-card p { font-size: 14px; line-height: 1.8; opacity: .95; max-width: 880px; position: relative; z-index: 1; }
+.identity-card .tags { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; position: relative; z-index: 1; }
+.identity-card .tag {
+  background: rgba(255,255,255,.18);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== Workflow Phases ===== */
+.workflow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.phase-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  border-top: 4px solid;
+  transition: all .25s;
+  position: relative;
+}
+.phase-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(102,126,234,.18); }
+.phase-card.p0 { border-color: #667eea; }
+.phase-card.p1 { border-color: #7c8ce8; }
+.phase-card.p2 { border-color: #8e7ccc; }
+.phase-card.p3 { border-color: #a070b8; }
+.phase-card.p4 { border-color: #764ba2; }
+.phase-card .phase-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #667eea;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.phase-card h3 { font-size: 15px; color: #333; margin-bottom: 8px; font-weight: 700; }
+.phase-card p { font-size: 12px; color: #666; line-height: 1.7; }
+.phase-card .auto-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.phase-card .auto-tag.auto { background: #e8f5e9; color: #2e7d32; }
+.phase-card .auto-tag.ask { background: #fff3e0; color: #e65100; }
+
+/* ===== Template Grid ===== */
+.phase-group { margin-bottom: 22px; }
+.phase-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #555;
+  background: linear-gradient(135deg, rgba(102,126,234,.08), rgba(118,75,162,.08));
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.phase-group-title .count {
+  font-size: 11px;
+  background: #fff;
+  color: #667eea;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.tpl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.tpl-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+  transition: all .25s;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.tpl-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(102,126,234,.18);
+}
+.tpl-card .tpl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.tpl-card .tpl-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: .5px;
+}
+.tpl-card .tpl-num.support { background: linear-gradient(135deg, #a070b8, #c084d8); }
+.tpl-card .tpl-name { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px; }
+.tpl-card .tpl-framework { font-size: 11px; color: #888; }
+.tpl-card .tpl-framework .kw {
+  display: inline-block;
+  background: #f0f2ff;
+  color: #667eea;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+/* ===== Red Lines ===== */
+.redline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.redline-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  border-left: 4px solid #e74c3c;
+}
+.redline-card h4 { font-size: 14px; color: #c0392b; margin-bottom: 8px; font-weight: 700; }
+.redline-card ul { list-style: none; padding-left: 0; }
+.redline-card li { font-size: 12px; color: #555; padding: 4px 0; padding-left: 18px; position: relative; }
+.redline-card li::before {
+  content: "▸";
+  position: absolute;
+  left: 4px;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+/* ===== Triggers ===== */
+.trigger-cloud {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  text-align: center;
+}
+.trigger-cloud .kw {
+  display: inline-block;
+  background: #f0f2ff;
+  color: #667eea;
+  padding: 6px 14px;
+  border-radius: 16px;
+  margin: 4px;
+  font-size: 13px;
+  transition: all .2s;
+}
+.trigger-cloud .kw:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 50px;
+  padding: 24px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  border-top: 1px solid #e8e8e8;
+}
+footer .links { margin-bottom: 8px; }
+footer a { color: #667eea; text-decoration: none; margin: 0 8px; }
+footer a:hover { text-decoration: underline; }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .workflow { grid-template-columns: repeat(2, 1fr); }
+  header h1 { font-size: 28px; }
+}
+@media (max-width: 600px) {
+  .workflow { grid-template-columns: 1fr; }
+  .stats-bar { gap: 12px; }
+  .stat-item { padding: 14px 20px; min-width: 90px; }
+  .stat-item .num { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <h1>PM Doc Writer</h1>
+    <p class="subtitle">产品经理文档生成 Skill · 60 套大厂级模板一键调用</p>
+    <span class="version-chip">v1.0.0 · 2026-05-16</span>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="num">60</div><div class="label">套模板</div></div>
+    <div class="stat-item"><div class="num">33</div><div class="label">主文档</div></div>
+    <div class="stat-item"><div class="num">27</div><div class="label">支撑工具</div></div>
+    <div class="stat-item"><div class="num">7</div><div class="label">产品阶段</div></div>
+    <div class="stat-item"><div class="num">12年</div><div class="label">大厂经验</div></div>
+    <div class="stat-item"><div class="num">5</div><div class="label">调用阶段</div></div>
+  </div>
+
+  <!-- Identity -->
+  <section>
+    <div class="identity-card">
+      <h2>👨‍💼 Role · 资深产品经理副本</h2>
+      <p>拥有 <strong>12 年经验的资深产品经理</strong>，曾在一线大厂（字节/腾讯/阿里）主导过 DAU 千万级产品从 0 到 1。熟悉三阶段评审流程（Kickoff → 业务/技术/设计 Review → 终审），精通核心框架。所有产出必须达到「能直接进大厂评审会」的标准。</p>
+      <div class="tags">
+        <span class="tag">JTBD</span>
+        <span class="tag">RICE</span>
+        <span class="tag">KANO</span>
+        <span class="tag">北极星指标</span>
+        <span class="tag">反指标</span>
+        <span class="tag">SWOT</span>
+        <span class="tag">TAM-SAM-SOM</span>
+        <span class="tag">三阶段评审</span>
+        <span class="tag">边界条件矩阵</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow -->
+  <section>
+    <div class="section-title">调用工作流 <span class="badge">5 个 Phase 严格执行</span></div>
+    <div class="workflow">
+      <div class="phase-card p0">
+        <div class="phase-num">PHASE 0</div>
+        <h3>分诊</h3>
+        <p>识别文档类型 + 组合需求 + 盲区扫描，自动定位 Top 3 候选模板</p>
+        <span class="auto-tag auto">AI 自动</span>
+      </div>
+      <div class="phase-card p1">
+        <div class="phase-num">PHASE 1</div>
+        <h3>三件事必问</h3>
+        <p>保存路径 / 是否新文件夹 / 输出格式（md/html/pdf/docx），一次问完不挤牙膏</p>
+        <span class="auto-tag ask">问 CEO</span>
+      </div>
+      <div class="phase-card p2">
+        <div class="phase-num">PHASE 2</div>
+        <h3>占位符补齐</h3>
+        <p>把模板里所有 <code>[占位符]</code> 列成清单一次性提问，给示例 + 默认假设</p>
+        <span class="auto-tag ask">问 CEO</span>
+      </div>
+      <div class="phase-card p3">
+        <div class="phase-num">PHASE 3</div>
+        <h3>执行产出</h3>
+        <p>严格按 Output Format 输出；可视化默认关；不编造数字；保留大厂硬要求</p>
+        <span class="auto-tag auto">AI 执行</span>
+      </div>
+      <div class="phase-card p4">
+        <div class="phase-num">PHASE 4</div>
+        <h3>交付后巡查</h3>
+        <p>扫描项目顶层临时文件，发现重复/截屏文件主动列清单让 CEO 选处理</p>
+        <span class="auto-tag auto">AI 自动</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Templates -->
+  <section>
+    <div class="section-title">主模板矩阵 <span class="badge">33 份覆盖完整产品生命周期</span></div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">🎯 战略层 <span class="count">5 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/01_市场数据报告.md"><div class="tpl-header"><span class="tpl-num">01</span></div><div class="tpl-name">市场数据报告</div><div class="tpl-framework"><span class="kw">TAM</span><span class="kw">SAM</span><span class="kw">SOM</span></div></a>
+        <a class="tpl-card" href="../模板/02_竞品深度体验报告.md"><div class="tpl-header"><span class="tpl-num">02</span></div><div class="tpl-name">竞品深度体验报告</div><div class="tpl-framework"><span class="kw">三层架构对比</span></div></a>
+        <a class="tpl-card" href="../模板/03_商业计划书BP.md"><div class="tpl-header"><span class="tpl-num">03</span></div><div class="tpl-name">商业计划书 BP</div><div class="tpl-framework"><span class="kw">融资视角</span></div></a>
+        <a class="tpl-card" href="../模板/04_项目立项报告.md"><div class="tpl-header"><span class="tpl-num">04</span></div><div class="tpl-name">项目立项报告</div><div class="tpl-framework"><span class="kw">ROI 测算</span></div></a>
+        <a class="tpl-card" href="../模板/05_SWOT分析报告.md"><div class="tpl-header"><span class="tpl-num">05</span></div><div class="tpl-name">SWOT 分析报告</div><div class="tpl-framework"><span class="kw">SWOT 矩阵</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">🔍 用户研究 <span class="count">5 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/06_用户调研报告.md"><div class="tpl-header"><span class="tpl-num">06</span></div><div class="tpl-name">用户调研报告</div><div class="tpl-framework"><span class="kw">5 层漏斗</span></div></a>
+        <a class="tpl-card" href="../模板/07_用户画像文档.md"><div class="tpl-header"><span class="tpl-num">07</span></div><div class="tpl-name">用户画像文档</div><div class="tpl-framework"><span class="kw">Persona</span></div></a>
+        <a class="tpl-card" href="../模板/08_问卷设计与数据报告.md"><div class="tpl-header"><span class="tpl-num">08</span></div><div class="tpl-name">问卷设计与数据报告</div><div class="tpl-framework"><span class="kw">信效度检验</span></div></a>
+        <a class="tpl-card" href="../模板/09_用户访谈记录与洞察报告.md"><div class="tpl-header"><span class="tpl-num">09</span></div><div class="tpl-name">用户访谈与洞察报告</div><div class="tpl-framework"><span class="kw">JTBD</span></div></a>
+        <a class="tpl-card" href="../模板/10_用户旅程地图.md"><div class="tpl-header"><span class="tpl-num">10</span></div><div class="tpl-name">用户旅程地图</div><div class="tpl-framework"><span class="kw">Journey Map</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">📐 产品定义 <span class="count">5 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/11_PRD产品需求文档.md"><div class="tpl-header"><span class="tpl-num">11</span></div><div class="tpl-name">PRD 产品需求文档</div><div class="tpl-framework"><span class="kw">三阶段评审</span><span class="kw">边界条件</span></div></a>
+        <a class="tpl-card" href="../模板/12_产品路线图Roadmap.md"><div class="tpl-header"><span class="tpl-num">12</span></div><div class="tpl-name">产品路线图 Roadmap</div><div class="tpl-framework"><span class="kw">Now/Next/Later</span></div></a>
+        <a class="tpl-card" href="../模板/13_功能清单FeatureList.md"><div class="tpl-header"><span class="tpl-num">13</span></div><div class="tpl-name">功能清单 FeatureList</div><div class="tpl-framework"><span class="kw">RICE 优先级</span></div></a>
+        <a class="tpl-card" href="../模板/14_信息架构图IA.md"><div class="tpl-header"><span class="tpl-num">14</span></div><div class="tpl-name">信息架构图 IA</div><div class="tpl-framework"><span class="kw">层级结构</span></div></a>
+        <a class="tpl-card" href="../模板/15_业务流程图.md"><div class="tpl-header"><span class="tpl-num">15</span></div><div class="tpl-name">业务流程图</div><div class="tpl-framework"><span class="kw">泳道图</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">🎨 设计与指标 <span class="count">4 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/16_数据指标体系文档.md"><div class="tpl-header"><span class="tpl-num">16</span></div><div class="tpl-name">数据指标体系文档</div><div class="tpl-framework"><span class="kw">北极星</span><span class="kw">反指标</span></div></a>
+        <a class="tpl-card" href="../模板/17_交互原型文档.md"><div class="tpl-header"><span class="tpl-num">17</span></div><div class="tpl-name">交互原型文档</div><div class="tpl-framework"><span class="kw">交互逻辑表</span></div></a>
+        <a class="tpl-card" href="../模板/18_UI设计规范DesignSystem.md"><div class="tpl-header"><span class="tpl-num">18</span></div><div class="tpl-name">UI 设计规范 DesignSystem</div><div class="tpl-framework"><span class="kw">Token 体系</span></div></a>
+        <a class="tpl-card" href="../模板/19_设计走查清单.md"><div class="tpl-header"><span class="tpl-num">19</span></div><div class="tpl-name">设计走查清单</div><div class="tpl-framework"><span class="kw">验收 CheckList</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">⚙️ 技术 <span class="count">6 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/20_技术报告.md"><div class="tpl-header"><span class="tpl-num">20</span></div><div class="tpl-name">技术报告</div><div class="tpl-framework"><span class="kw">技术选型</span></div></a>
+        <a class="tpl-card" href="../模板/21_模型选型评估报告.md"><div class="tpl-header"><span class="tpl-num">21</span></div><div class="tpl-name">模型选型评估报告</div><div class="tpl-framework"><span class="kw">能力/成本/合规</span></div></a>
+        <a class="tpl-card" href="../模板/22_API接口文档.md"><div class="tpl-header"><span class="tpl-num">22</span></div><div class="tpl-name">API 接口文档</div><div class="tpl-framework"><span class="kw">OpenAPI</span></div></a>
+        <a class="tpl-card" href="../模板/23_数据库设计文档.md"><div class="tpl-header"><span class="tpl-num">23</span></div><div class="tpl-name">数据库设计文档</div><div class="tpl-framework"><span class="kw">ER 图</span></div></a>
+        <a class="tpl-card" href="../模板/24_埋点需求文档.md"><div class="tpl-header"><span class="tpl-num">24</span></div><div class="tpl-name">埋点需求文档</div><div class="tpl-framework"><span class="kw">事件属性表</span></div></a>
+        <a class="tpl-card" href="../模板/25_测试用例文档.md"><div class="tpl-header"><span class="tpl-num">25</span></div><div class="tpl-name">测试用例文档</div><div class="tpl-framework"><span class="kw">用例矩阵</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">🚀 上线运营 <span class="count">6 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/26_产品使用手册.md"><div class="tpl-header"><span class="tpl-num">26</span></div><div class="tpl-name">产品使用手册</div><div class="tpl-framework"><span class="kw">用户教育</span></div></a>
+        <a class="tpl-card" href="../模板/27_上线CheckList.md"><div class="tpl-header"><span class="tpl-num">27</span></div><div class="tpl-name">上线 CheckList</div><div class="tpl-framework"><span class="kw">14 项必检</span></div></a>
+        <a class="tpl-card" href="../模板/28_商业化与定价方案.md"><div class="tpl-header"><span class="tpl-num">28</span></div><div class="tpl-name">商业化与定价方案</div><div class="tpl-framework"><span class="kw">定价策略</span></div></a>
+        <a class="tpl-card" href="../模板/29_运营策略文档.md"><div class="tpl-header"><span class="tpl-num">29</span></div><div class="tpl-name">运营策略文档</div><div class="tpl-framework"><span class="kw">AARRR</span></div></a>
+        <a class="tpl-card" href="../模板/30_ASO应用商店材料.md"><div class="tpl-header"><span class="tpl-num">30</span></div><div class="tpl-name">ASO 应用商店材料</div><div class="tpl-framework"><span class="kw">关键词+视觉</span></div></a>
+        <a class="tpl-card" href="../模板/31_项目汇报复盘材料.md"><div class="tpl-header"><span class="tpl-num">31</span></div><div class="tpl-name">项目汇报复盘材料</div><div class="tpl-framework"><span class="kw">STAR+三层归因</span></div></a>
+      </div>
+    </div>
+
+    <div class="phase-group">
+      <div class="phase-group-title">📊 合规与数据 <span class="count">2 份</span></div>
+      <div class="tpl-grid">
+        <a class="tpl-card" href="../模板/32_AI合规与隐私文档.md"><div class="tpl-header"><span class="tpl-num">32</span></div><div class="tpl-name">AI 合规与隐私文档</div><div class="tpl-framework"><span class="kw">GDPR</span><span class="kw">国内法规</span></div></a>
+        <a class="tpl-card" href="../模板/33_数据分析周报月报.md"><div class="tpl-header"><span class="tpl-num">33</span></div><div class="tpl-name">数据分析周报月报</div><div class="tpl-framework"><span class="kw">北极星追踪</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support Templates -->
+  <section>
+    <div class="section-title">支撑模板矩阵 <span class="badge">27 份可组合调用</span></div>
+    <div class="tpl-grid">
+      <a class="tpl-card" href="../支撑文档模板/S01_行业白皮书摘要模板.md"><div class="tpl-header"><span class="tpl-num support">S01</span></div><div class="tpl-name">行业白皮书摘要</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S02_政策法规清单模板.md"><div class="tpl-header"><span class="tpl-num support">S02</span></div><div class="tpl-name">政策法规清单</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S03_TAM_SAM_SOM测算表模板.md"><div class="tpl-header"><span class="tpl-num support">S03</span></div><div class="tpl-name">TAM/SAM/SOM 测算表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S04_财务模型表模板.md"><div class="tpl-header"><span class="tpl-num support">S04</span></div><div class="tpl-name">财务模型表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S05_ROI测算表模板.md"><div class="tpl-header"><span class="tpl-num support">S05</span></div><div class="tpl-name">ROI 测算表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S06_竞品功能对比矩阵模板.md"><div class="tpl-header"><span class="tpl-num support">S06</span></div><div class="tpl-name">竞品功能对比矩阵</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S07_RICE评分表模板.md"><div class="tpl-header"><span class="tpl-num support">S07</span></div><div class="tpl-name">RICE 评分表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S08_KANO分析表模板.md"><div class="tpl-header"><span class="tpl-num support">S08</span></div><div class="tpl-name">KANO 分析表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S09_用户标签体系模板.md"><div class="tpl-header"><span class="tpl-num support">S09</span></div><div class="tpl-name">用户标签体系</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S10_埋点验收清单模板.md"><div class="tpl-header"><span class="tpl-num support">S10</span></div><div class="tpl-name">埋点验收清单</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S11_灰度发布计划模板.md"><div class="tpl-header"><span class="tpl-num support">S11</span></div><div class="tpl-name">灰度发布计划</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S12_应急预案模板.md"><div class="tpl-header"><span class="tpl-num support">S12</span></div><div class="tpl-name">应急预案</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S13_内容日历模板.md"><div class="tpl-header"><span class="tpl-num support">S13</span></div><div class="tpl-name">内容日历</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S14_渠道投放计划表模板.md"><div class="tpl-header"><span class="tpl-num support">S14</span></div><div class="tpl-name">渠道投放计划表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S15_问卷模板.md"><div class="tpl-header"><span class="tpl-num support">S15</span></div><div class="tpl-name">问卷模板</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S16_泳道图制作指南.md"><div class="tpl-header"><span class="tpl-num support">S16</span></div><div class="tpl-name">泳道图制作指南</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S17_架构图制作指南.md"><div class="tpl-header"><span class="tpl-num support">S17</span></div><div class="tpl-name">架构图制作指南</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S18_数据看板制作指南.md"><div class="tpl-header"><span class="tpl-num support">S18</span></div><div class="tpl-name">数据看板制作指南</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S19_性能测试报告模板.md"><div class="tpl-header"><span class="tpl-num support">S19</span></div><div class="tpl-name">性能测试报告</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S20_Bug跟踪表模板.md"><div class="tpl-header"><span class="tpl-num support">S20</span></div><div class="tpl-name">Bug 跟踪表</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S21_AB实验报告模板.md"><div class="tpl-header"><span class="tpl-num support">S21</span></div><div class="tpl-name">AB 实验报告</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S22_FAQ知识库模板.md"><div class="tpl-header"><span class="tpl-num support">S22</span></div><div class="tpl-name">FAQ 知识库</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S23_活动SOP模板.md"><div class="tpl-header"><span class="tpl-num support">S23</span></div><div class="tpl-name">活动 SOP</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S24_隐私政策文本模板.md"><div class="tpl-header"><span class="tpl-num support">S24</span></div><div class="tpl-name">隐私政策文本</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S25_用户协议文本模板.md"><div class="tpl-header"><span class="tpl-num support">S25</span></div><div class="tpl-name">用户协议文本</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S26_截图录屏制作规范.md"><div class="tpl-header"><span class="tpl-num support">S26</span></div><div class="tpl-name">截图录屏制作规范</div></a>
+      <a class="tpl-card" href="../支撑文档模板/S27_数据采集方法指南.md"><div class="tpl-header"><span class="tpl-num support">S27</span></div><div class="tpl-name">数据采集方法指南</div></a>
+    </div>
+  </section>
+
+  <!-- Quality Red Lines -->
+  <section>
+    <div class="section-title">质量红线 <span class="badge">不可妥协</span></div>
+    <div class="redline-grid">
+      <div class="redline-card">
+        <h4>📋 PRD 必须有</h4>
+        <ul>
+          <li>一句话定位公式</li>
+          <li>北极星指标 + ≥2 个反指标</li>
+          <li>三阶段评审表</li>
+          <li>交互逻辑表（正常/空/加载/首次）</li>
+          <li>边界条件矩阵 ≥6 个异常场景</li>
+        </ul>
+      </div>
+      <div class="redline-card">
+        <h4>💼 BP 必须有</h4>
+        <ul>
+          <li>市场规模（TAM/SAM/SOM）</li>
+          <li>商业模式画布</li>
+          <li>财务模型 3 年预测</li>
+          <li>退出机制</li>
+        </ul>
+      </div>
+      <div class="redline-card">
+        <h4>🎯 立项报告必须有</h4>
+        <ul>
+          <li>ROI 测算</li>
+          <li>风险矩阵</li>
+          <li>资源需求</li>
+          <li>Plan B</li>
+        </ul>
+      </div>
+      <div class="redline-card">
+        <h4>🔭 竞品报告必须有</h4>
+        <ul>
+          <li>≥3 个直接竞品</li>
+          <li>三层架构对比（功能/体验/商业）</li>
+          <li>差异化结论</li>
+        </ul>
+      </div>
+      <div class="redline-card">
+        <h4>📊 数据规则</h4>
+        <ul>
+          <li>不许编造数据</li>
+          <li>不确定的事实标注「假设/待验证」</li>
+          <li>市场数据必须标注来源（艾瑞/QuestMobile/Statista/财报）</li>
+        </ul>
+      </div>
+      <div class="redline-card">
+        <h4>🛡 盲区对冲（默认开启）</h4>
+        <ul>
+          <li>🟥 红队扫描</li>
+          <li>🟨 反常识扫描</li>
+          <li>🟩 完美陷阱警报</li>
+          <li>💜 情绪-事实分层</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trigger Cloud -->
+  <section>
+    <div class="section-title">触发词云 <span class="badge">说这些词自动唤起 Skill</span></div>
+    <div class="trigger-cloud">
+      <span class="kw">写 PRD</span>
+      <span class="kw">写 BP</span>
+      <span class="kw">立项报告</span>
+      <span class="kw">竞品分析</span>
+      <span class="kw">用户画像</span>
+      <span class="kw">调研报告</span>
+      <span class="kw">Roadmap</span>
+      <span class="kw">FeatureList</span>
+      <span class="kw">信息架构</span>
+      <span class="kw">流程图</span>
+      <span class="kw">指标体系</span>
+      <span class="kw">设计规范</span>
+      <span class="kw">技术报告</span>
+      <span class="kw">模型选型</span>
+      <span class="kw">API 文档</span>
+      <span class="kw">埋点</span>
+      <span class="kw">测试用例</span>
+      <span class="kw">上线 CheckList</span>
+      <span class="kw">商业化方案</span>
+      <span class="kw">运营策略</span>
+      <span class="kw">ASO</span>
+      <span class="kw">复盘</span>
+      <span class="kw">合规</span>
+      <span class="kw">周报月报</span>
+      <span class="kw">RICE</span>
+      <span class="kw">KANO</span>
+      <span class="kw">SWOT</span>
+      <span class="kw">TAM SAM SOM</span>
+      <span class="kw">用户旅程</span>
+      <span class="kw">JTBD</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="links">
+      <a href="SKILL.md">📜 SKILL.md 提示词全文</a>
+      <a href="../index.html">🏠 VELA DocForge 工作台</a>
+      <a href="../README.md">📘 项目说明</a>
+    </div>
+    <div>PM Doc Writer v1.0.0 · 2026-05-16 · 一人公司架构 · CEO: itawjh-lgtm</div>
+  </footer>
+
+</div>
+</body>
+</html>

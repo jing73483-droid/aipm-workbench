@@ -1,0 +1,218 @@
+/* Premium cream / lavender glass skin, keyed off the FrsionOS-style reference. */
+
+:global(html),
+:global(body),
+:global(body[data-ds-dark-theme]) {
+  color-scheme: light;
+  --aipm-cream: #f3eee6;
+  --aipm-cream-deep: #ebe3d6;
+  --aipm-ink: #1c1916;
+  --aipm-ink-soft: #5c564f;
+  --aipm-purple: #c4b3e8;
+  --aipm-purple-deep: #9d86d4;
+  --aipm-glass-fill: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.38) 48%,
+    rgba(232, 222, 245, 0.22) 100%
+  );
+  --aipm-glass-fill-strong: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.86) 0%,
+    rgba(236, 228, 248, 0.5) 100%
+  );
+  --aipm-glass-border: 1px solid rgba(255, 255, 255, 0.78);
+  --aipm-glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 18px 40px rgba(140, 118, 90, 0.14),
+    0 2px 0 rgba(255, 255, 255, 0.4);
+  --dsw-alias-bg-base: var(--aipm-cream);
+  --dsw-alias-bg-layer-1: #f7f2ea;
+  --dsw-alias-bg-layer-2: #f7f2ea;
+  --dsw-alias-bg-layer-3: #fffdf8;
+  --dsw-alias-bg-overlay: #e8dfd2;
+  --dsw-alias-bg-module-platform: var(--aipm-cream-deep);
+  --dsw-alias-label-primary: var(--aipm-ink);
+  --dsw-alias-label-primary-dimmed: #2a2622;
+  --dsw-alias-label-primary-foreground: #f7f3eb;
+  --dsw-alias-label-primary-inverted: #f7f3eb;
+  --dsw-alias-label-secondary: var(--aipm-ink-soft);
+  --dsw-alias-label-tertiary: #8a837a;
+  --dsw-alias-label-caption: #9a9288;
+  --dsw-alias-brand-primary: var(--aipm-ink);
+  --dsw-alias-brand-text: var(--aipm-ink);
+  --dsw-alias-button-primary-fill: #1c1916;
+  --dsw-alias-button-primary-hover: #2e2924;
+  --dsw-alias-button-primary-dimmed: #e8e0d4;
+  --dsw-alias-interactive-bg-hover: rgba(28, 25, 22, 0.05);
+  --dsw-alias-interactive-bg-active: rgba(28, 25, 22, 0.08);
+  --dsw-alias-border-l1: rgba(28, 25, 22, 0.04);
+  --dsw-alias-border-l2: rgba(28, 25, 22, 0.08);
+  --dsw-alias-border-l3: rgba(28, 25, 22, 0.1);
+  --dsw-alias-border-l4: rgba(28, 25, 22, 0.14);
+  --dsw-specific-sidebar-fill: #efe8dc;
+  --dsw-specific-input-major: rgba(255, 255, 255, 0.58);
+  --dsw-specific-sidebar-nav-item-active: rgba(255, 255, 255, 0.62);
+  --dsw-specific-sidebar-nav-item-hover: rgba(255, 255, 255, 0.4);
+  --dsw-specific-sidebar-nav-item-active-accent: rgba(196, 179, 232, 0.35);
+  --dsw-menu-surface-fill: rgba(255, 252, 247, 0.82);
+  --dsw-specific-menu: var(--dsw-menu-surface-fill);
+  --dsw-alias-scrollbar-bg-l1: #d9d0c3;
+  --dsw-alias-scrollbar-bg-l2: #d9d0c3;
+  --dsw-alias-state-business-primary: var(--aipm-purple-deep);
+  --dsw-alias-state-business-tertiary: #efe6fb;
+  background-color: var(--aipm-cream) !important;
+  color: var(--aipm-ink);
+}
+
+:global(html) {
+  background-color: var(--aipm-cream);
+}
+
+:global(body) {
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 14% 26%, rgba(196, 179, 232, 0.55) 0 0.8px, transparent 1.4px),
+    radial-gradient(circle at 88% 16%, rgba(255, 255, 255, 0.85) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 82% 72%, rgba(196, 179, 232, 0.45) 0 0.7px, transparent 1.4px),
+    radial-gradient(42% 32% at 12% 22%, rgba(255, 255, 255, 0.55), transparent 70%),
+    radial-gradient(28% 24% at 88% 18%, rgba(196, 179, 232, 0.28), transparent 72%),
+    radial-gradient(36% 28% at 78% 82%, rgba(255, 255, 255, 0.4), transparent 70%);
+}
+
+:global(html)::before,
+:global(html)::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 50%;
+}
+
+:global(html)::before {
+  top: 9%;
+  right: 6.5%;
+  width: 88px;
+  height: 88px;
+  background:
+    radial-gradient(circle at 34% 30%, #ffffff 0 18%, #e8e4dc 42%, #c2bdb4 78%);
+  box-shadow:
+    18px 24px 40px rgba(140, 118, 90, 0.22),
+    inset -10px -12px 18px rgba(80, 70, 60, 0.16),
+    inset 8px 8px 12px rgba(255, 255, 255, 0.7);
+}
+
+:global(html)::after {
+  left: 22%;
+  bottom: 11%;
+  width: 72px;
+  height: 72px;
+  background:
+    radial-gradient(circle at 32% 28%, #f7f2ff 0 16%, #c4a6e8 48%, #8d6fc0 78%);
+  box-shadow:
+    14px 20px 36px rgba(140, 110, 160, 0.2),
+    inset -8px -10px 16px rgba(70, 40, 100, 0.18),
+    inset 8px 8px 12px rgba(255, 255, 255, 0.55);
+  opacity: 0.92;
+}
+
+:global(#root),
+:global([data-phase]),
+:global([class*='AppFrame']),
+:global([class*='ConversationRoot']) {
+  background: transparent !important;
+}
+
+:global([data-phase='hero'] [class*='composerHero']) {
+  position: relative;
+  padding: 36px 28px 28px;
+  border-radius: 48px;
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.16) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 40px 80px rgba(140, 118, 90, 0.14);
+  backdrop-filter: blur(28px) saturate(1.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.35);
+  overflow: visible;
+}
+
+:global([data-phase='hero'] [class*='headline']),
+:global([data-aipm-hero-mark]) {
+  position: relative;
+  z-index: 1;
+}
+
+:global([data-aipm-hero-mark]) {
+  gap: 14px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: radial-gradient(120% 90% at 50% 50%, rgba(196, 179, 232, 0.16), transparent 70%);
+}
+
+:global([data-phase='hero'] [class*='heroWorkspaceRow']),
+:global([data-phase='hero'] [class*='workspaceRow']) {
+  position: relative;
+  z-index: 2;
+}
+
+:global([data-aipm-hero-mark] svg) {
+  width: 44px !important;
+  height: 44px !important;
+  filter: drop-shadow(0 10px 18px rgba(120, 90, 180, 0.22));
+}
+
+:global([data-aipm-hero-mark] span:last-child) {
+  font-size: 42px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--aipm-ink);
+}
+
+:global([data-phase='hero'] button[aria-haspopup='menu']) {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: var(--aipm-ink) !important;
+}
+
+:global(button[aria-haspopup='menu']),
+:global(button[aria-label='发送消息']),
+:global(button[aria-label='Send message']),
+:global(button[aria-label='排队发送']),
+:global(button[aria-label='插话发送']),
+:global(button[aria-label='Queue send']),
+:global(button[aria-label='Steer send']) {
+  border: var(--aipm-glass-border) !important;
+  border-radius: 999px !important;
+  background: var(--aipm-glass-fill) !important;
+  box-shadow: var(--aipm-glass-shadow) !important;
+  color: var(--aipm-ink) !important;
+  backdrop-filter: blur(22px) saturate(1.45);
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+}
+
+:global([class*='card']:has([contenteditable='true'])) {
+  border-radius: 32px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.42) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 24px 50px rgba(140, 118, 90, 0.14) !important;
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+}
+
+:global([class*='newSession']),
+:global(button[class*='primary']) {
+  border-radius: 999px !important;
+  background: #1c1916 !important;
+  color: #f7f3eb !important;
+  box-shadow: 0 10px 24px rgba(28, 25, 22, 0.18) !important;
+  border: 0 !important;
+}
+
+:global(nav[aria-label='全局面板']),
+:global([class*='SidebarRoot']),
+:global([class*='sidebar'] [class*='root']) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(239, 232, 220, 0.55)) !important;
+}

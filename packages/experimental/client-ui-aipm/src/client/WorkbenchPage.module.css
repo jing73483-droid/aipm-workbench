@@ -1,0 +1,254 @@
+.page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--aipm-ink, #1c1916);
+  background:
+    radial-gradient(42% 34% at 18% 0%, rgba(196, 179, 232, 0.22), transparent 70%),
+    radial-gradient(36% 30% at 92% 8%, rgba(255, 255, 255, 0.7), transparent 68%),
+    var(--aipm-cream, #f3eee6);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-width: 240px;
+  max-width: 360px;
+  min-height: 0;
+  overflow: auto;
+  margin: 18px 0 18px 18px;
+  padding: 8px 16px 28px;
+  border: var(--aipm-glass-border, 1px solid rgba(255, 255, 255, 0.7));
+  border-radius: 36px;
+  background: var(--aipm-glass-fill, rgba(255, 255, 255, 0.42));
+  box-shadow: var(--aipm-glass-shadow, 0 24px 50px rgba(140, 118, 90, 0.12));
+  backdrop-filter: blur(22px) saturate(1.35);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 8px 8px;
+  margin-bottom: 16px;
+}
+
+:global([data-platform='darwin']) .heading {
+  padding-top: calc(22px + var(--dsh-frame-top-clearance, 0px));
+}
+
+.heading h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--aipm-ink-soft, #5c564f);
+}
+
+.row,
+.rowActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: var(--aipm-glass-fill, rgba(255, 255, 255, 0.45));
+  box-shadow: var(--aipm-glass-shadow, none);
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+.rowActive {
+  border-color: rgba(255, 255, 255, 0.85);
+  background:
+    linear-gradient(135deg, rgba(214, 198, 242, 0.55) 0%, rgba(255, 255, 255, 0.55) 70%);
+  box-shadow: var(--aipm-glass-shadow, none);
+  backdrop-filter: blur(18px) saturate(1.4);
+}
+
+.pane {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  margin: 18px;
+  padding: 28px 32px 48px;
+  border: var(--aipm-glass-border, 1px solid rgba(255, 255, 255, 0.7));
+  border-radius: 40px;
+  background:
+    radial-gradient(80% 60% at 88% 12%, rgba(196, 179, 232, 0.28), transparent 46%),
+    var(--aipm-glass-fill, rgba(255, 255, 255, 0.4));
+  box-shadow: var(--aipm-glass-shadow, 0 30px 60px rgba(140, 118, 90, 0.12));
+  backdrop-filter: blur(24px) saturate(1.35);
+}
+
+:global([data-platform='darwin']) .pane {
+  padding-top: calc(28px + var(--dsh-frame-top-clearance, 0px));
+}
+
+.form,
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 960px;
+}
+
+.form h2,
+.splitHead strong {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.form h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form label,
+.editorPane,
+.previewPane {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--aipm-ink-soft, #5c564f);
+}
+
+.form input,
+.form select,
+.form textarea,
+.editorPane textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: var(--aipm-glass-border, 1px solid rgba(255, 255, 255, 0.7));
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--aipm-glass-shadow, none);
+  color: var(--aipm-ink, #1c1916);
+  font: inherit;
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+.form textarea,
+.editorPane textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.editorPane textarea {
+  flex: 1;
+  min-height: 360px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.splitHead,
+.actions,
+.gateRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.splitHead {
+  justify-content: space-between;
+}
+
+.splitBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+
+.previewPane {
+  min-width: 0;
+  padding: 16px;
+  border: var(--aipm-glass-border, 1px solid rgba(255, 255, 255, 0.7));
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: var(--aipm-glass-shadow, none);
+  overflow: auto;
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+.muted {
+  color: var(--aipm-ink-soft, #5c564f);
+}
+
+.error,
+.notice {
+  margin: 0 0 12px;
+}
+
+.error {
+  color: var(--dsw-alias-label-danger, #c43);
+}
+
+.notice {
+  padding: 10px 16px;
+  border: var(--aipm-glass-border, 0);
+  border-radius: 18px;
+  background: var(--aipm-glass-fill, rgba(255, 255, 255, 0.5));
+  box-shadow: var(--aipm-glass-shadow, none);
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+.heading :global(button),
+.actions :global(button),
+.form :global(button),
+.gateRow :global(button),
+.splitHead :global(button) {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #1c1916 !important;
+  color: #f7f3eb !important;
+  box-shadow: 0 10px 24px rgba(28, 25, 22, 0.16) !important;
+}
